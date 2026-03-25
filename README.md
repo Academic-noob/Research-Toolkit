@@ -84,11 +84,11 @@ PAIRED_INI=false
 NEB_DIR="neb"     
 
 ### 4. 共用初始态名称（仅当 PAIRED_INI=false 时有效！）
-# 规则：去掉 "POSCAR_" 和 "_IS"
+规则：去掉 "POSCAR_" 和 "_IS"
 MASTER_IS="Vac_I_1_39" 
 
 ### 5. 待计算的末态列表清单
-# 规则：去掉 "POSCAR_" 前缀，必须保留 "_FS" 后缀，用双引号包裹
+规则：去掉 "POSCAR_" 前缀，必须保留 "_FS" 后缀，用双引号包裹
 DEFECT_LIST=(
 "Vac_I_1_39_4_FS"
 "Vac_I_1_39_22_FS"
