@@ -1,0 +1,271 @@
+# ============================================================
+# doped + ShakeNBreak 自动结构生成工作流配置文件
+# ============================================================
+# 本配置文件由以下命令读取：
+#   python 01_generate_doped_snb_structures.py --config 00_workflow_config.toml
+#
+# 阶段 1 和阶段 2 故意不依赖本地 POTCAR 文件。
+# 本地脚本使用 doped 构建缺陷超胞，并调用 ShakeNBreak 的
+# Distortions.apply_distortions() 仅生成 POSCAR 扰动结构。
+#
+# POTCAR / NELECT / 集群模板将在上传集群后，由以下命令补齐：
+#   python 02_finalize_vasp_inputs.py --config 00_workflow_config.toml
+
+[paths]
+# 输入：已经充分弛豫的无缺陷 pristine bulk 结构。
+# 可以是原胞，也可以是你已经准备好的目标大超胞。
+# 相对路径均以本 TOML 文件所在目录为基准解析。
+bulk = "bulk_POSCAR"
+
+# 自动生成的工作流根目录。
+# 如果该目录已经存在且不为空，默认不会覆盖，
+# 除非 workflow.overwrite = true。
+workflow_root = "doped_snb_workflow"
+
+# 可选：本地模板文件。
+# 如果希望阶段 1 暂时不复制 INCAR、KPOINTS 和 job 脚本，可设为空字符串。
+# 也可以在集群端由 02_finalize_vasp_inputs.py 再统一覆盖。
+incar_template = "doped_snb_auto_workflow_bundle/templates/INCAR_PBE_SNB.template"
+kpoints_template = "doped_snb_auto_workflow_bundle/templates/KPOINTS_Gamma"
+job_template = "doped_snb_auto_workflow_bundle/templates/job_slurm.sh.template"
+
+[workflow]
+# 警告：设为 true 时，会删除已经存在的 workflow_root 后重新生成。
+# 正式工作流中建议保持 false，避免误删已有结果。
+overwrite = true
+
+# 传递给 doped.DefectsGenerator 的进程数。
+# Windows 或内存较小的机器建议从 1 开始。
+# 只有确认内存余量充足后，才逐步提高。
+processes = 1
+
+# 除完整 ShakeNBreak 目录外，额外写出轻量级代表性缺陷 POSCAR。
+# 便于使用 VESTA 快速检查缺陷位置与结构是否合理。
+write_representative_defects = false
+
+[supercell]
+# true  = 由 doped 自动搜索高效缺陷超胞。
+# false = 输入的 bulk 已经是最终目标超胞，不再自动扩胞。
+#
+# 对你当前工作流，如果通常自己准备大超胞，应保持：
+# generate_supercell = false
+generate_supercell = true
+
+# 以下参数仅在 generate_supercell = true 时生效。
+# 当 generate_supercell = false 时，可以保留，也可以删除或注释。
+
+# 周期性缺陷镜像之间的最小距离，单位 Å。
+min_image_distance = 10.0
+
+# 自动构建超胞时要求的最小原子数。
+min_atoms = 50
+
+# doped 可以继续搜索不超过初始可接受超胞
+# (1 + ideal_threshold) 倍大小的其他候选，
+# 以寻找更规则、更简单的扩胞矩阵。
+ideal_threshold = 0.10
+
+# 通常保持 false 更节省计算量。
+# force_cubic = true 会倾向生成更接近立方体的超胞；
+# force_diagonal = true 会倾向使用对角扩胞矩阵。
+# 除非明确理解代价，否则不要同时开启。
+force_cubic = false
+force_diagonal = false
+
+# 目标缺陷优先放置位置。
+# doped 会在对称等价位点中，优先选择最接近该分数坐标的位置。
+# [0.5, 0.5, 0.5] 表示尽量将缺陷放在超胞中心附近。
+target_frac_coords = [0.5, 0.5, 0.5]
+
+[defects]
+# doped 自动生成的本征缺陷类型。
+# 可选值：
+#   "vacancy"      空位
+#   "substitution" 替位 / 反位
+#   "interstitial" 间隙
+#
+# 初次冒烟测试建议只保留：
+#include_types = ["vacancy"]
+include_types = ["vacancy", "substitution", "interstitial"]
+
+# 是否执行间隙位点搜索。
+# 间隙位点通常通过 Voronoi tessellation 自动搜索。
+# 对低对称、多元素体系，该步骤可能较耗时。
+# 快速测试阶段建议设为 false。
+generate_interstitials = false
+
+# 可选：外源掺杂元素。
+# 示例：
+# extrinsic = ["Na", "Cu"]
+#
+# 空列表表示只生成本征缺陷。
+extrinsic = ['S']
+
+# 可选：对 doped 生成的缺陷名称使用正则表达式进行二次筛选。
+# 空列表表示不按名称过滤。
+#
+# 示例：
+# include_name_regex = ["^v_I", "^I_i"]
+# exclude_name_regex = ["_H1\\.20"]
+include_name_regex = []
+exclude_name_regex = []
+
+# 可选：对所有缺陷条目应用全局电荷态过滤。
+# 空列表表示保留 doped 自动推荐的全部电荷态。
+#
+# 示例：仅保留 -1、0、+1：
+# include_charges = [-1, 0, 1]
+include_charges = []
+
+# doped 自动推荐电荷态时使用的控制参数。
+# charge_padding 对空位特别重要；
+# charge_probability_threshold 主要影响替位和间隙缺陷。
+#
+# 这些只是起始参数，不是普适定律。
+# 对强重构、负 U、两性缺陷等情况，仍需人工复核。
+charge_padding = 1
+charge_probability_threshold = 0.0075
+
+# 可选：在 doped 自动推荐后，手动补充特定缺陷的电荷态。
+# 键名应写缺陷物种名称，不包含最终电荷后缀。
+[defects.add_charge_states]
+# 示例：
+# "v_I" = [-2]
+
+# 可选：删除 doped 自动推荐但你不希望保留的电荷态。
+[defects.remove_charge_states]
+# 示例：
+# "v_I" = [2]
+
+# 可选：显式指定输入 bulk 中的间隙位点分数坐标。
+# 留空表示使用 doped 默认的 Voronoi 间隙搜索。
+[interstitials]
+coords = []
+
+# 可选：传递给 doped 间隙位点生成器的额外关键字参数。
+# 没有明确需求时保持为空。
+[interstitials.generator_kwargs]
+
+[shakenbreak]
+# true  = 生成 ShakeNBreak 扰动结构。
+# false = 只导出 doped 缺陷，不生成 SnB 扰动目录。
+enabled = true
+
+# 显式指定 ShakeNBreak 键长扰动幅度。
+#
+# 空列表表示使用 ShakeNBreak 默认值：
+#   -60% 到 +60%，步长 10%
+#   对 vacancy 默认还会加入 Dimer 候选。
+#
+# 保守的冒烟测试推荐：
+# bond_distortions = [-0.2, 0.0, 0.2]
+#
+# 更完整的初筛推荐：
+# bond_distortions = [
+#   -0.4, -0.3, -0.2, -0.1,
+#    0.0,
+#    0.1,  0.2,  0.3,  0.4
+# ]
+bond_distortions = [-0.2, 0.0, 0.2]
+
+# 是否为 vacancy 额外生成 Dimer 候选。
+# 如果自动 dimer 生成导致病态短键、原子重叠，
+# 或出现 ASE 的 a0 == a1 报错，应暂时设为 false。
+include_dimer = true
+
+# 仅当 bond_distortions = [] 时使用。
+# 推荐值通常为 0.1 到 0.3。
+distortion_increment = 0.10
+
+# false 是 ShakeNBreak 通常推荐的默认设置。
+# 一般情况下，全胞 rattling 比局部衰减式 rattling 更可靠。
+local_rattle = false
+
+# 可选：rattling 控制参数。
+# 设置为 0.0 时，由 ShakeNBreak 自动选择默认值。
+#
+# stdev 默认通常约为最近邻距离的 10%。
+# d_min 默认通常约为最近邻距离的 80%。
+stdev = 0.0
+d_min = 0.0
+
+# 氧化态用于指导 ShakeNBreak 判断需要扰动多少个近邻原子。
+# 自动猜测不可靠时，应显式设置。
+[shakenbreak.oxidation_states]
+# 示例：
+# Pb = 2
+# I = -1
+
+# 可选：按缺陷名称手动限制需要扰动的元素。
+# 留空表示由 ShakeNBreak 自动选择最近邻。
+[shakenbreak.distorted_elements]
+# 示例：
+# "v_Cd" = ["Te"]
+
+# 可选：按缺陷名称手动指定需要扰动的原子索引。
+# 留空表示由 ShakeNBreak 自动选择。
+[shakenbreak.distorted_atoms]
+# 示例：
+# "v_Cd" = [0, 2]
+
+[finalize]
+# 阶段 2 通常在上传集群后执行。
+#
+# POTCAR 处理模式：
+#   "skip"    ：不创建 POTCAR，仅复制模板并进行审计。
+#   "copy"    ：将同一个指定 POTCAR 复制到全部计算目录。
+#               只有当所有 POSCAR 元素集合与顺序完全一致时才安全。
+#   "command" ：在每个计算目录中运行你自己的 POTCAR 生成命令。
+#               当不同缺陷目录的元素组成不同，推荐使用该模式。
+potcar_mode = "skip"
+
+# 示例命令。
+# 运行时，当前工作目录 cwd 会自动切换到每个计算目录，
+# 该目录中已经存在 POSCAR。
+#
+# 请替换为你自己在集群上的真实 POTCAR 生成脚本路径。
+potcar_command = "python C:/Users/123/Desktop/Project/My/Workspace/pbe5.4.4_0_pot/potcar_5.4.4.py"
+
+# 仅当 potcar_mode = "copy" 时使用。
+potcar_file = ""
+
+# 可选：集群端模板覆盖。
+# 空字符串表示保留阶段 1 已复制的模板。
+cluster_incar_template = ""
+cluster_kpoints_template = ""
+cluster_job_template = ""
+
+# POTCAR 创建后，脚本会读取 POTCAR 中的 ZVAL，
+# 计算中性价电子数，并将以下参数写入 INCAR：
+#
+#   NELECT = neutral_electrons - defect_charge
+#
+# 其中：
+#   q = +1 → 减少 1 个电子
+#   q =  0 → 电子数不变
+#   q = -1 → 增加 1 个电子
+write_nelect = true
+
+# NUPDOWN 处理模式：
+#
+#   "audit_only"
+#       不修改 INCAR；
+#       仅根据 NELECT 奇偶性给出建议。
+#
+#   "parity"
+#       自动写入：
+#       偶数 NELECT → NUPDOWN = 0
+#       奇数 NELECT → NUPDOWN = 1
+#
+#   "preserve"
+#       保留已有 NUPDOWN；
+#       不修改，也不给出奇偶性建议。
+#
+# 注意：
+# 电荷奇偶性只能给出初始猜测，不能代替磁性态测试。
+nupdown_mode = "audit_only"
+
+# 如果目标目录已经存在 POTCAR：
+# true  = 拒绝覆盖，避免误改正式计算输入；
+# false = 允许覆盖。
+protect_existing_potcar = true
