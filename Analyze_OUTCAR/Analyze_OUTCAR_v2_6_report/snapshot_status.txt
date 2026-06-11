@@ -1,0 +1,23 @@
+VaspDoctor v2.6 offline snapshot status
+generated_at = 2026-06-05T16:10:59+08:00
+status = NOT_CONVERGED_IN_SNAPSHOT
+outcar_force_blocks = 25
+oszicar_completed_ionic_steps = 25
+analysis_records = 25
+reliably_paired_energy_steps = 25
+force_only_analysis_steps = 0
+outcar_energy_fallback_steps = 0
+incomplete_scf_steps_at_snapshot_end = 1
+last_completed_ionic_energy_eV = -875.825774
+last_completed_ionic_energy_source = OUTCAR TOTEN locked: last value before completed POSITION TOTAL-FORCE block
+last_max_force_eV_per_A = 0.16935654
+last_delta_energy_eV = 0.00028863
+last_scf_steps = 5
+eta_available = True
+eta_metric = max_force
+eta_target = 0.02
+eta_current = 0.16935654093361732
+eta_remaining_ionic_steps = 16
+eta_remaining_walltime = 3 h 29 min 20 s
+eta_confidence = HIGH
+eta_reason = Estimated from the recent logarithmic decline of the active convergence metric.

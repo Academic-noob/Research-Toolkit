@@ -1,0 +1,405 @@
+{
+  "tool": "VaspDoctor v2.6",
+  "inputs": {
+    "OUTCAR": "OUTCAR",
+    "OSZICAR": "OSZICAR",
+    "POSCAR": "POSCAR",
+    "INCAR": "INCAR",
+    "CONTCAR": "CONTCAR"
+  },
+  "settings": {
+    "EDIFF": 0.0001,
+    "EDIFFG": -0.02,
+    "IBRION": 2,
+    "NSW": 300,
+    "ISIF": 2,
+    "ISYM": -1,
+    "NELM": 60
+  },
+  "nions": 179,
+  "outcar_force_blocks": 25,
+  "oszicar_completed_ionic_steps": 25,
+  "analysis_records": 25,
+  "reliably_paired_energy_steps": 25,
+  "force_only_analysis_steps": 0,
+  "oszicar_incomplete_scf_steps": 1,
+  "loop_plus_walltime_samples_seconds": [
+    1564.0728,
+    1036.7615,
+    911.8684,
+    1037.3789,
+    974.2361,
+    848.6581,
+    723.9486,
+    722.9239,
+    848.0411,
+    973.5703,
+    910.3514,
+    847.0828,
+    785.3472,
+    597.2251,
+    722.5718,
+    847.7869,
+    973.2607,
+    911.2695,
+    597.6296,
+    721.8954,
+    848.0493,
+    910.3276,
+    660.5685,
+    848.809,
+    659.8163
+  ],
+  "latest_raw_outcar_toten_eV_diagnostic_only": -875.81316105,
+  "latest_raw_outcar_toten_line": 50366,
+  "latest_raw_outcar_toten_note": "Raw tail reference only. Ionic-step energies are separately locked to completed POSITION TOTAL-FORCE blocks.",
+  "outcar_energy_fallback_steps": 0,
+  "last_energy_crosscheck": {
+    "step": 25,
+    "outcar_locked_toten_eV": -875.82577405,
+    "outcar_toten_line": 48700,
+    "oszicar_F_eV": -899.43206,
+    "outcar_minus_oszicar_eV": 23.60628595000003
+  },
+  "energy_crosscheck_mismatches": [
+    {
+      "step": 1,
+      "outcar_locked_toten_eV": -875.5812367,
+      "outcar_toten_line": 2341,
+      "oszicar_F_eV": -899.20493,
+      "outcar_minus_oszicar_eV": 23.623693300000014
+    },
+    {
+      "step": 2,
+      "outcar_locked_toten_eV": -875.61609791,
+      "outcar_toten_line": 4406,
+      "oszicar_F_eV": -899.23463,
+      "outcar_minus_oszicar_eV": 23.61853209000003
+    },
+    {
+      "step": 3,
+      "outcar_locked_toten_eV": -875.72366538,
+      "outcar_toten_line": 6393,
+      "oszicar_F_eV": -899.34458,
+      "outcar_minus_oszicar_eV": 23.620914619999894
+    },
+    {
+      "step": 4,
+      "outcar_locked_toten_eV": -875.72041531,
+      "outcar_toten_line": 8450,
+      "oszicar_F_eV": -899.33551,
+      "outcar_minus_oszicar_eV": 23.615094689999978
+    },
+    {
+      "step": 5,
+      "outcar_locked_toten_eV": -875.75945854,
+      "outcar_toten_line": 10476,
+      "oszicar_F_eV": -899.37757,
+      "outcar_minus_oszicar_eV": 23.618111460000023
+    },
+    {
+      "step": 6,
+      "outcar_locked_toten_eV": -875.76929882,
+      "outcar_toten_line": 12416,
+      "oszicar_F_eV": -899.38604,
+      "outcar_minus_oszicar_eV": 23.616741179999963
+    },
+    {
+      "step": 7,
+      "outcar_locked_toten_eV": -875.77063981,
+      "outcar_toten_line": 14286,
+      "oszicar_F_eV": -899.38682,
+      "outcar_minus_oszicar_eV": 23.61618018999991
+    },
+    {
+      "step": 8,
+      "outcar_locked_toten_eV": -875.77565277,
+      "outcar_toten_line": 16148,
+      "oszicar_F_eV": -899.39135,
+      "outcar_minus_oszicar_eV": 23.615697230000023
+    },
+    {
+      "step": 9,
+      "outcar_locked_toten_eV": -875.78591351,
+      "outcar_toten_line": 18096,
+      "oszicar_F_eV": -899.40016,
+      "outcar_minus_oszicar_eV": 23.614246490000028
+    },
+    {
+      "step": 10,
+      "outcar_locked_toten_eV": -875.7837778,
+      "outcar_toten_line": 20114,
+      "oszicar_F_eV": -899.39511,
+      "outcar_minus_oszicar_eV": 23.611332199999993
+    },
+    {
+      "step": 11,
+      "outcar_locked_toten_eV": -875.78854082,
+      "outcar_toten_line": 22093,
+      "oszicar_F_eV": -899.40185,
+      "outcar_minus_oszicar_eV": 23.613309179999987
+    },
+    {
+      "step": 12,
+      "outcar_locked_toten_eV": -875.79492284,
+      "outcar_toten_line": 24033,
+      "oszicar_F_eV": -899.40737,
+      "outcar_minus_oszicar_eV": 23.612447159999988
+    },
+    {
+      "step": 13,
+      "outcar_locked_toten_eV": -875.79703926,
+      "outcar_toten_line": 25942,
+      "oszicar_F_eV": -899.40882,
+      "outcar_minus_oszicar_eV": 23.611780739999972
+    },
+    {
+      "step": 14,
+      "outcar_locked_toten_eV": -875.7971917,
+      "outcar_toten_line": 27726,
+      "oszicar_F_eV": -899.40883,
+      "outcar_minus_oszicar_eV": 23.61163829999998
+    },
+    {
+      "step": 15,
+      "outcar_locked_toten_eV": -875.7994134,
+      "outcar_toten_line": 29588,
+      "oszicar_F_eV": -899.41073,
+      "outcar_minus_oszicar_eV": 23.611316599999896
+    },
+    {
+      "step": 16,
+      "outcar_locked_toten_eV": -875.80386868,
+      "outcar_toten_line": 31536,
+      "oszicar_F_eV": -899.41423,
+      "outcar_minus_oszicar_eV": 23.610361319999924
+    },
+    {
+      "step": 17,
+      "outcar_locked_toten_eV": -875.80363753,
+      "outcar_toten_line": 33554,
+      "oszicar_F_eV": -899.41209,
+      "outcar_minus_oszicar_eV": 23.60845247000009
+    },
+    {
+      "step": 18,
+      "outcar_locked_toten_eV": -875.80505919,
+      "outcar_toten_line": 35533,
+      "oszicar_F_eV": -899.41481,
+      "outcar_minus_oszicar_eV": 23.609750810000037
+    },
+    {
+      "step": 19,
+      "outcar_locked_toten_eV": -875.8061519,
+      "outcar_toten_line": 37317,
+      "oszicar_F_eV": -899.41578,
+      "outcar_minus_oszicar_eV": 23.60962810000001
+    },
+    {
+      "step": 20,
+      "outcar_locked_toten_eV": -875.80917313,
+      "outcar_toten_line": 39187,
+      "oszicar_F_eV": -899.41842,
+      "outcar_minus_oszicar_eV": 23.609246869999993
+    },
+    {
+      "step": 21,
+      "outcar_locked_toten_eV": -875.81425207,
+      "outcar_toten_line": 41127,
+      "oszicar_F_eV": -899.42274,
+      "outcar_minus_oszicar_eV": 23.608487930000024
+    },
+    {
+      "step": 22,
+      "outcar_locked_toten_eV": -875.81982071,
+      "outcar_toten_line": 43106,
+      "oszicar_F_eV": -899.42681,
+      "outcar_minus_oszicar_eV": 23.60698929
+    },
+    {
+      "step": 23,
+      "outcar_locked_toten_eV": -875.82185551,
+      "outcar_toten_line": 44929,
+      "oszicar_F_eV": -899.4287,
+      "outcar_minus_oszicar_eV": 23.60684449000007
+    },
+    {
+      "step": 24,
+      "outcar_locked_toten_eV": -875.82548542,
+      "outcar_toten_line": 46877,
+      "oszicar_F_eV": -899.4319,
+      "outcar_minus_oszicar_eV": 23.60641458000009
+    },
+    {
+      "step": 25,
+      "outcar_locked_toten_eV": -875.82577405,
+      "outcar_toten_line": 48700,
+      "oszicar_F_eV": -899.43206,
+      "outcar_minus_oszicar_eV": 23.60628595000003
+    }
+  ],
+  "assessment": {
+    "status": "NOT_CONVERGED_IN_SNAPSHOT",
+    "criterion_met_by_parsed_values": false,
+    "convergence_basis": "max force <= |EDIFFG| (0.02 eV/Å)",
+    "official_vasp_stop_message": false,
+    "formal_convergence_confirmed": false,
+    "heuristic_force_threshold_eV_per_A": 0.02,
+    "heuristic_force_ok": false,
+    "nelm_saturated_steps": [],
+    "nsw_reached": false,
+    "progress_estimate": {
+      "available": true,
+      "metric": "max_force",
+      "metric_unit": "eV/Å",
+      "target": 0.02,
+      "current": 0.16935654093361732,
+      "current_to_target_ratio": 8.467827046680865,
+      "trend_window_requested": 8,
+      "trend_points_used": 8,
+      "estimated_remaining_ionic_steps": 16,
+      "estimated_completion_ionic_step": 41,
+      "median_loop_plus_walltime_seconds": 784.97235,
+      "estimated_remaining_walltime_seconds": 12559.5576,
+      "estimated_remaining_walltime_human": "3 h 29 min 20 s",
+      "confidence": "HIGH",
+      "reason": "Estimated from the recent logarithmic decline of the active convergence metric.",
+      "remaining_nsw_budget": 275,
+      "estimated_to_fit_within_current_nsw": true,
+      "warning": "This is a trend-based estimate, not a guaranteed completion time.",
+      "trend_log_slope_per_ionic_step": -0.13815834311174816,
+      "trend_multiplicative_factor_per_ionic_step": 0.8709607701880601,
+      "trend_r_squared": 0.8188718366062208,
+      "recent_non_increasing_fraction": 0.8571428571428571
+    }
+  },
+  "last_step": {
+    "step": 25,
+    "header_line": 50079,
+    "end_line": 50259,
+    "energy_eV": -875.82577405,
+    "energy_source": "OUTCAR TOTEN locked: last value before completed POSITION TOTAL-FORCE block",
+    "delta_energy_eV": 0.00028863000000001193,
+    "max_force_eV_per_A": 0.16935654093361732,
+    "max_atom_index_1based": 3,
+    "max_atom_element": "C",
+    "max_force_vector_eV_per_A": [
+      -0.096478,
+      -0.132743,
+      -0.041868
+    ],
+    "drift_eV_per_A": 0.30772194905628686,
+    "drift_vector_eV_per_A": [
+      -0.105367,
+      -0.281939,
+      -0.064039
+    ],
+    "pressure_kB": -8.98,
+    "scf_steps": 5,
+    "lattice_A": [
+      [
+        17.482273533,
+        0.034558663,
+        -0.039431374
+      ],
+      [
+        -0.106279009,
+        17.482388628,
+        0.040235407
+      ],
+      [
+        0.165378229,
+        -0.164713434,
+        12.834603339
+      ]
+    ]
+  },
+  "bottleneck_atoms": [
+    {
+      "atom_index_1based": 3,
+      "element": "C",
+      "bottleneck_count": 8,
+      "fraction": 0.32,
+      "historical_max_force_eV_per_A": 0.6256018623581615,
+      "historical_max_force_step": 17,
+      "force_vector_at_historical_max_eV_per_A": [
+        0.195311,
+        0.418171,
+        0.422332
+      ]
+    },
+    {
+      "atom_index_1based": 17,
+      "element": "N",
+      "bottleneck_count": 5,
+      "fraction": 0.2,
+      "historical_max_force_eV_per_A": 0.48206243030545326,
+      "historical_max_force_step": 10,
+      "force_vector_at_historical_max_eV_per_A": [
+        -0.336406,
+        -0.27807,
+        -0.204676
+      ]
+    },
+    {
+      "atom_index_1based": 114,
+      "element": "Pb",
+      "bottleneck_count": 5,
+      "fraction": 0.2,
+      "historical_max_force_eV_per_A": 0.11498291358719347,
+      "historical_max_force_step": 9,
+      "force_vector_at_historical_max_eV_per_A": [
+        0.084516,
+        -0.074681,
+        0.02238
+      ]
+    },
+    {
+      "atom_index_1based": 21,
+      "element": "N",
+      "bottleneck_count": 3,
+      "fraction": 0.12,
+      "historical_max_force_eV_per_A": 0.993048197628393,
+      "historical_max_force_step": 2,
+      "force_vector_at_historical_max_eV_per_A": [
+        -0.681515,
+        0.607362,
+        0.390888
+      ]
+    },
+    {
+      "atom_index_1based": 162,
+      "element": "I",
+      "bottleneck_count": 2,
+      "fraction": 0.08,
+      "historical_max_force_eV_per_A": 0.15941357039474402,
+      "historical_max_force_step": 22,
+      "force_vector_at_historical_max_eV_per_A": [
+        -0.001941,
+        0.035247,
+        -0.155456
+      ]
+    }
+  ],
+  "fatal_error_hits": {},
+  "fatal_error_context": {},
+  "suspicious_hits": {},
+  "suspicious_context": {},
+  "ignored_benign_error_hits": {
+    "POTCAR kinetic-energy metadata": [
+      468,
+      471,
+      474,
+      477,
+      480,
+      483
+    ]
+  },
+  "info_messages": [],
+  "warnings": [
+    "OSZICAR 末尾存在 1 个尚未归入已完成离子步的电子步：下载快照可能截取于该 SCF 中，也可能对应一次中途停止的计算。",
+    "OUTCAR 锁定 TOTEN 与 OSZICAR F= 存在差异。最近一次差异位于 step 25: OUTCAR=-875.82577405 eV, OSZICAR=-899.43206000 eV, OUTCAR-OSZICAR=23.60628595 eV。脚本不会自动替换任一能量，请结合原始文件判断原因。",
+    "最后一步 total drift=0.307722 eV/Å，高于辅助警戒值 0.005 eV/Å。该指标仅用于数值质量检查，不是 VASP 正式离子收敛条件。"
+  ],
+  "export_source": "copied from CONTCAR"
+}

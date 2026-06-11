@@ -1,0 +1,38 @@
+SYSTEM = nonrad endpoint relax
+
+ISTART = 0
+ICHARG = 2
+
+PREC = Normal
+#PREC = Accurate
+#ALGO = Normal
+ALGO = Damped
+TIME = 0.4
+ENCUT = 400
+EDIFF = 1E-4
+EDIFFG = -0.02
+#NELM = 60
+#NELMIN = 5
+
+ISPIN = 2
+NUPDOWN = 1
+NELECT = 795
+
+IBRION = 2
+NSW = 300
+ISIF = 2
+ISYM = -1
+
+ISMEAR = 0
+SIGMA = 0.04
+#LREAL = .FALSE.
+LREAL = A
+
+LHFCALC = .TRUE.
+HFSCREEN = 0.2
+!AEXX = 0.31
+PRECFOCK = Fast
+
+IVDW = 12
+LWAVE = .FALSE.
+LCHARG = .FALSE.
