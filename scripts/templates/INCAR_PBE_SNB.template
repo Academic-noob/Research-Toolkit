@@ -1,0 +1,28 @@
+SYSTEM = ShakeNBreak PBE structure screening
+
+ISTART = 0
+ICHARG = 2
+
+ENCUT  = 400
+PREC   = Normal
+EDIFF  = 1E-5
+EDIFFG = -0.02
+NELM   = 100
+
+ISPIN = 2
+ISYM  = -1
+
+IBRION = 2
+NSW    = 250
+ISIF   = 2
+POTIM  = 0.2
+
+ISMEAR = 0
+SIGMA  = 0.05
+LREAL  = Auto
+
+LWAVE  = .FALSE.
+LCHARG = .FALSE.
+
+# NELECT is inserted later by 02_finalize_vasp_inputs.py after POTCAR generation.
+# NUPDOWN should be audited per charge state. Parity is only an initial guess.
