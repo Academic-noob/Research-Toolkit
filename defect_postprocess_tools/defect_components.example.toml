@@ -1,0 +1,19 @@
+# Active configuration example
+
+["vac_Sn"]
+enabled = true
+components = ["vac_Sn"]
+label = "V_Sn"
+correction_center_mode = "auto"
+
+["vac_Sn_vac_FA"]
+enabled = true
+components = ["vac_Sn", "vac_FA"]
+label = "V_Sn + V_FA"
+correction_center_mode = "skip"
+
+["vac_Sn_2vac_FA"]
+enabled = true
+components = ["vac_Sn", "2vac_FA"]
+label = "V_Sn + 2V_FA"
+correction_center_mode = "skip"
